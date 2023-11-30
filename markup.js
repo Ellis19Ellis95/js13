@@ -24,29 +24,47 @@ function createInfoBlock(image) {
   }
   
   function createPhotoCard(image) {
-    const photoCard = document.createElement('div');
-    photoCard.classList.add('photo-card');
+    const photoCard = `
+      <div class="photo-card">
+        <div class="image-container">
+          <a href="${image.largeImageURL}">
+            <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy">
+          </a>
+        </div>
+        ${createInfoBlock(image).outerHTML}
+      </div>
+    `;
+    
+    const div = document.createElement('div');
+    div.innerHTML = photoCard.trim();
   
-    const imgContainer = document.createElement('div');
-    imgContainer.classList.add('image-container');
-  
-    const imgLink = document.createElement('a');
-    imgLink.href = image.largeImageURL;
-  
-    const img = document.createElement('img');
-    img.src = image.webformatURL;
-    img.alt = image.tags;
-    img.loading = 'lazy';
-  
-    imgLink.appendChild(img);
-    imgContainer.appendChild(imgLink);
-    photoCard.appendChild(imgContainer);
-  
-    const infoBlock = createInfoBlock(image);
-    photoCard.appendChild(infoBlock);
-  
-    return photoCard;
+    return div.firstChild;
   }
+
+  //function createPhotoCard(image) {
+    //const photoCard = document.createElement('div');
+    //photoCard.classList.add('photo-card');
+  
+   // const imgContainer = document.createElement('div');
+    //imgContainer.classList.add('image-container');
+  
+    //const imgLink = document.createElement('a');
+   // imgLink.href = image.largeImageURL;
+  
+   // const img = document.createElement('img');
+   // img.src = image.webformatURL;
+   // img.alt = image.tags;
+   // img.loading = 'lazy';
+  
+   // imgLink.appendChild(img);
+   // imgContainer.appendChild(imgLink);
+   // photoCard.appendChild(imgContainer);
+  
+   // const infoBlock = createInfoBlock(image);
+   // photoCard.appendChild(infoBlock);
+  
+   // return photoCard;
+  //}
   
   function createColumnContainers(columns) {
     return Array.from({ length: columns }, () => {
